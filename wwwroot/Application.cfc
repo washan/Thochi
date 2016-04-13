@@ -1,4 +1,4 @@
-﻿<cfcomponent displayname="Application" output="false" hint="Menejo de la aplicación">
+﻿<cfcomponent displayname="Application" output="false" hint="Manejo de la aplicación">
  
     <!--- Configuracion de la aplicacion--->
     <cfset This.Name 			    = "Tochi" />
@@ -11,7 +11,7 @@
  
     <cffunction name="OnApplicationStart" access="public" returntype="boolean" output="false" hint="Se activa cuando se crea la primera aplicación.">
 		<cfset Application.RootTemplate = '/FLATY/code'/>
-		<cfset Application.Context      = '/'/>
+		<cfset Application.Context      = ''/>
 		<cfset Application.Datasorce    = 'Thochi'/>
         <cfreturn true />
     </cffunction>
