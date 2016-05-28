@@ -39,7 +39,7 @@
 				<cfabort>
 			<cfelse>
 				<cfquery name="rsUsuario" datasource="#Application.Datasorce#">
-					select Clave 
+					select Usucodigo, Clave 
 						from Usuarios
 					where Correo = <cfqueryparam cfsqltype="cf_sql_varchar" value="#form.J_USERNAME#">
 				</cfquery>
@@ -59,6 +59,7 @@
 					<cfset roles = "user">
 				</cfif>
 				<cfloginuser name = "#cflogin.name#" password = "#cflogin.password#" roles = "#roles#"/>
+				<cfset session.Usucodigo = rsUsuario.Usucodigo>
 			</cfif>
 		</cflogin>
 		<cfif isdefined('URL.Logout')>

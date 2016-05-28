@@ -7,11 +7,11 @@
 		<cfinclude template="Usuario-form.cfm">	
 	<cfelseif isdefined('form.Action') and form.Action EQ 'Delete'>
 		<cfinvoke component="Componentes.Usuarios" method="delete">
-			<cfinvokeargument name="UsuarioId" value="#form.UsuarioId#">
+			<cfinvokeargument name="Usucodigo" value="#form.Usucodigo#">
 		</cfinvoke>
 		<cflocation url="Usuario.cfm">
 	<cfelse>
-		<cf_grid Name="cfGridUsuario" title="Usuarios del sistema" query="#rssql#" key="UsuarioId">
+		<cf_grid Name="cfGridUsuario" title="Usuarios del sistema" query="#rssql#" key="Usucodigo">
 			<cf_gridcolumn name="NombreCompleto" header="Usuario">
 			<cf_gridcolumn name="Correo" 		 header="Correo">
 		</cf_grid>
