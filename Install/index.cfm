@@ -1,4 +1,7 @@
 <cfquery datasource="#Application.Datasorce#">
+	delete from thochi 
+</cfquery>
+<cfquery datasource="#Application.Datasorce#">
 	insert into thochi (version) select  1
 </cfquery>
 <!---Creacion de Usuarios--->
@@ -44,7 +47,7 @@ Usuario Administrador creado<br />
 		INSERT INTO menus(Codigo,Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
 			select 'menus','Menus','/Portal/seguridad/Menu.cfm','1',
 			(select Menuid from menus where Codigo = 'seguridad'),
-			'',2,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
+			'',1,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
 		from thochi
 		where (select Count(1)
 				from menus
