@@ -19,7 +19,7 @@
         <cfdump var="#Attributes.var#">
     </cfif>
     <cfif Attributes.abort>
-        <cf_abort errorInterfaz="">
+        <cfabort>
     </cfif>
 <cfelse>
 	<cfif #session.Usulogin# EQ #Attributes.user#>
@@ -35,7 +35,7 @@
             <cfdump var="#Attributes.var#">
         </cfif>
 		<cfif Attributes.abort>
-            <cf_abort errorInterfaz="">
+             <cfabort>
         </cfif>
     </cfif>
 </cfif>
