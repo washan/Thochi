@@ -1,6 +1,6 @@
 ﻿<cfinvoke component="Componentes.Menu" method="get" returnvariable="rssql"> </cfinvoke>
 
-<cf_header title="Catálogo de opciones de Menu del Sistema" Overview="Definición de las opciones de Menu del Sistema" icon="fa fa-users">
+<cf_header title="Opciones de Menu del Sistema" Overview="Definición de las opciones de Menu del Sistema" icon="fa fa-users">
 	<cfif isdefined('form.Action') and form.Action EQ 'NEW'>
 		<cfinclude template="Menu-form.cfm">
 	<cfelseif isdefined('form.Action') and form.Action EQ 'Edit'>
@@ -12,7 +12,7 @@
 		<cflocation url="Menu.cfm">
 	<cfelse>
 		<cf_grid Name="cfGridMenu" title="Opciones de Menu del sistema" query="#rssql#" key="MenuId">
-			<cf_gridcolumn name="MenuId" 		header="MenuId">
+			<!--- <cf_gridcolumn name="MenuId" 		header="MenuId"> --->
 			<cf_gridcolumn name="Codigo" 		header="Codigo">
 			<cf_gridcolumn name="Titulo" 		header="Titulo">
 			<cf_gridcolumn name="Nivel" 		header="Nivel">
