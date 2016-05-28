@@ -19,9 +19,11 @@
 					<label class="col-sm-3 col-lg-2 control-label">Checkboxes</label>
 					<div class="col-sm-9 col-lg-10 controls">
 						<label class="checkbox">
-							<input type="checkbox" name="checkbox"> Checkbox 1                                                    </label>
+							<input type="checkbox" name="checkbox"> Checkbox 1                                                    
+						</label>
 						<label class="checkbox">
-							<input type="checkbox" name="checkbox"> Checkbox 2                                                    </label>
+							<input type="checkbox" name="checkbox"> Checkbox 2                                                    
+						</label>
 					</div>
 				</div>
 				<div class="form-group">
@@ -50,9 +52,11 @@
 					<label class="col-sm-3 col-lg-2 control-label">Checkboxes</label>
 					<div class="col-sm-9 col-lg-10 controls">
 						<label class="checkbox">
-							<input type="checkbox" name="checkbox"> Checkbox 1                                                    </label>
+							<input type="checkbox" name="checkbox"> Checkbox 1                                                    
+						</label>
 						<label class="checkbox">
-							<input type="checkbox" name="checkbox"> Checkbox 2                                                    </label>
+							<input type="checkbox" name="checkbox"> Checkbox 2                                                    
+						</label>
 					</div>
 				</div>
 				<div class="form-group">

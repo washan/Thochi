@@ -37,6 +37,7 @@
 			<!-- BEGIN Submenu -->
 			<ul class="submenu">
 				<li><a href="/Portal/Usuario.cfm">Usuarios</a></li>
+				<li><a href="/Portal/Menu.cfm">Definición Opciones Menu Sistema</a></li>
 				<li><a href="ui_general.html">Usuarios y Permisos</a></li>
 			</ul>
 			<!-- END Submenu -->

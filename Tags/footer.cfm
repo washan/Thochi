@@ -1,6 +1,6 @@
 ﻿ </div> <!-- END Main Content -->
   <footer align="center">
-                    <p>© 2014 Thochi. Todos los derechos reservados</p>
+                    <p>© 2016 Thochi. Todos los derechos reservados</p>
                 </footer>
 
                 <a id="btn-scrollup" class="btn btn-circle btn-lg" href="#"><i class="fa fa-chevron-up"></i></a>            </div>
@@ -9,6 +9,7 @@
         <!-- END Container -->
 
 		<cfoutput>
+
 			<!--basic scripts-->
 			<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 			<script>window.jQuery || document.write('<script src="#Application.RootTemplate#/assets/jquery/jquery-2.0.3.min.js"><\/script>')</script>

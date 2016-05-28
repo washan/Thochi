@@ -11,8 +11,11 @@
 <cfparam name="Attributes.ButtonExcel"  	default="true" /> 			<!---Coloca el boton de Exportar a Excel--->
 <cfparam name="Attributes.ButtonRefresh"  	default="true" /> 			<!---Coloca el boton de Refrescar--->
 <cfparam name="Attributes.checkbox"  		default="true" />			<!---true: Coloca checkbox, false: No coloca checkbox---> 
+<cfparam name="Attributes.key"  			default="" />				<!---Campos llave para pasar informacion---> 
 <cfparam name="caller.namecols" 			default="" />
 <cfparam name="caller.headercols" 			default="" />
+
+
 
 <cfswitch expression="#ThisTag.ExecutionMode#">
 	<!--- Start tag processing --->
@@ -42,10 +45,10 @@
 									<a class="btn btn-circle show-tooltip" title="Agregar nuevo Registro" href="#" onclick="New<cfoutput>#Attributes.Nombre#</cfoutput>()"><i class="fa fa-plus"></i></a>
 								</cfif>
 								<cfif Attributes.ButtonEdit>
-									<a class="btn btn-circle show-tooltip" title="Edit selected" href="#"><i class="fa fa-edit"></i></a>
+									<a class="btn btn-circle show-tooltip" title="Editar Registro seleccionado" href="#" onclick="Edit<cfoutput>#Attributes.Nombre#</cfoutput>()"><i class="fa fa-edit"></i></a>
 								</cfif>
 								<cfif Attributes.ButtonDelete>
-									<a class="btn btn-circle show-tooltip" title="Delete selected" href="#"><i class="fa fa-trash-o"></i></a>                                    
+									<a class="btn btn-circle show-tooltip" title="Delete selected" href="#" onclick="Delete<cfoutput>#Attributes.Nombre#</cfoutput>()"><i class="fa fa-trash-o"></i></a>                                    
 								</cfif>
 							</div>
 							<div class="btn-group">
@@ -77,7 +80,7 @@
 				<thead>
 					<tr>
 						<cfif Attributes.checkbox>
-							<th style="width:18px"><input type="checkbox" /></th>
+							<th style="width:18px"><input type="checkbox"/></th>
 						</cfif>
 						<cfloop list="#caller.headercols#" index="ccol">
 							<th class="text-center"><cfoutput>#ccol#</cfoutput></th>
@@ -88,7 +91,9 @@
 					<cfloop query="Attributes.query">
 						<tr class="table-flag-blue">
 							<cfif Attributes.checkbox>
-								<td><input type="checkbox" /></td>
+								<cfset x= 'Attributes.query.'&#Attributes.key#>
+								<td><input type="checkbox" name="<cfoutput>#Attributes.key#</cfoutput>" id="<cfoutput>#Attributes.key#</cfoutput>" 
+								value="<cfoutput>#EVALUATE(x)#</cfoutput>"/></td>
 							</cfif>
 							
 								<cfloop list="#caller.namecols#" index="ccol">
@@ -107,7 +112,7 @@
 				</div>
 					</div>
 				</div>
-			</div>
+			</div
 		</div>
 		<input name="Action" id="Action" type="hidden" value="New"/>
 		</form>
@@ -117,6 +122,29 @@
 				document.Listado.submit();
 				return true;
 			}
+			function Edit<cfoutput>#Attributes.Nombre#</cfoutput>(){
+				if (($('input[type=checkbox]:checked').length === 0) || ($('input[type=checkbox]:checked').length != 1)) {
+			        alert('Debe seleccionar un Registro para Modificar');
+			    }
+			    else{
+			    	document.Listado.Action.value = 'Edit';
+					document.Listado.submit();
+					return true;
+			    }
+			}
+
+			function Delete<cfoutput>#Attributes.Nombre#</cfoutput>(){
+				if ($('input[type=checkbox]:checked').length === 0) {
+			        alert('Debe seleccionar al menos un Registro');
+			    }
+			    else{
+			    	document.Listado.Action.value = 'Delete';
+					document.Listado.submit();
+					return true;
+			    }
+			}
+
+			
 		</script>
 	</cfcase>
 </cfswitch>
