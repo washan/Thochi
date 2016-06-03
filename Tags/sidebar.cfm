@@ -38,6 +38,7 @@
 			<ul class="submenu">
 				<li><a href="/Portal/seguridad/Usuario.cfm">Usuarios</a></li>
 				<li><a href="/Portal/seguridad/Menu.cfm">Definición Opciones Menu Sistema</a></li>
+				<li><a href="/Portal/seguridad/Roles.cfm">Roles del Sistema</a></li>
 				<li><a href="ui_general.html">Usuarios y Permisos</a></li>
 			</ul>
 			<!-- END Submenu -->

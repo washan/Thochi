@@ -1,19 +1,42 @@
-<cfquery datasource="#Application.Datasorce#">
-	delete from thochi 
-</cfquery>
-<cfquery datasource="#Application.Datasorce#">
-	insert into thochi (version) select  1
-</cfquery>
-<!---Creacion de Usuarios--->
-<cfflush interval="5">
-<cfquery datasource="#Application.Datasorce#">
-	Insert into Usuarios (Nombre, Apellido1, Apellido2, Cedula, Clave, Correo)
-	select 'Thochi','Admin','Portal','123456',<cfoutput>'#Hash('thochi','MD5')#'</cfoutput>,'admin@thochi.com'
-	from thochi
-	where (select Count(1)
-			from Usuarios
-		   where Cedula = '123456') = 0
-</cfquery>
+<cfif isDefined('Application.Datasorce')>
+	<cfquery datasource="#Application.Datasorce#">
+		delete from thochi 
+	</cfquery>
+	<cfquery datasource="#Application.Datasorce#">
+		insert into thochi (version) select  1
+	</cfquery>
+	<cfflush interval="5">
+	<cfquery datasource="#Application.Datasorce#">
+		Insert into Usuarios (Nombre, Apellido1, Apellido2, Cedula, Clave, Correo)
+		select 'Thochi','Admin','Portal','123456',<cfoutput>'#Hash('thochi','MD5')#'</cfoutput>,'admin@thochi.com'
+		from thochi
+		where (select Count(1)
+				from Usuarios
+			   where Cedula = '123456') = 0
+	</cfquery>
+<cfelse>
+	<cfquery datasource="thochi">
+		delete from thochi 
+	</cfquery>
+	<cfquery datasource="thochi">
+		insert into thochi (version) select  1
+	</cfquery>
+
+	<!---Creacion de Usuarios--->
+	<cfflush interval="5">
+	<cfquery datasource="thochi">
+		Insert into Usuarios (Nombre, Apellido1, Apellido2, Cedula, Clave, Correo)
+		select 'Thochi','Admin','Portal','123456',<cfoutput>'#Hash('thochi','MD5')#'</cfoutput>,'admin@thochi.com'
+		from thochi
+		where (select Count(1)
+				from Usuarios
+			   where Cedula = '123456') = 0
+	</cfquery>
+</cfif>
+
+
+<cfdump var="#session#">
+
 Usuario Administrador creado<br />
 <cfif isdefined('session.Usucodigo')>
 	<!---Creacion de Menús Creados--->

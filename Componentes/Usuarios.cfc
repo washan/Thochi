@@ -3,13 +3,12 @@
 		<cfargument name="Debug" 	type="boolean" required="false" 	default="false"> 
         <cfargument name="Usucodigo"   type="numeric" required="false">
 
-
 		<cfquery name="rssql" datasource="#Application.Datasorce#">
-			SELECT Usucodigo id,Usucodigo, Nombre, Apellido1, Apellido2
+			SELECT Usucodigo id,Usucodigo, Cedula, Nombre, Apellido1, Apellido2
 				, CONCAT(Nombre ,' ', Coalesce(Apellido1,'') , ' ' , Coalesce(Apellido2,'')) NombreCompleto, Correo
 			FROM Usuarios 
-			<cfif isdefined('Arguments.MenuId') and len(Arguments.MenuId) and not isdefined('Arguments.Codigo')>
-                where Usucodigo = <cfqueryparam cfsqltype="cf_sql_numeric" value="#arguments.MenuId#">
+			<cfif isdefined('Arguments.Usucodigo') and len(Arguments.Usucodigo) and not isdefined('Arguments.Codigo')>
+                where Usucodigo = <cfqueryparam cfsqltype="cf_sql_numeric" value="#arguments.Usucodigo#">
             </cfif>
             order by Correo
 		</cfquery>
@@ -33,7 +32,7 @@
         <cfargument name="Conexion" 	required="false" 	type="string" 	default="thochi">  
 
         <cftransaction>   
-            <cfif isdefined('Arguments.UsuarioId')>
+            <cfif isdefined('Arguments.Usucodigo')>
                 <cfquery datasource="#Arguments.Conexion#" result="res">
                 	update Usuarios set 
                          Cedula     	= <cfqueryparam cfsqltype="cf_sql_varchar"  value="#Arguments.Cedula#">
@@ -43,14 +42,14 @@
                         ,Correo 		= <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Correo#">
                         ,Clave			= <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Clave#">
 						,FechaCambio	= CURRENT_DATE()
-                        ,Usucodigo		= <cfqueryparam cfsqltype="cf_sql_numeric" 	value="#session.Usucodigo#">
+                        ,BMUsucodigo	= <cfqueryparam cfsqltype="cf_sql_numeric" 	value="#session.Usucodigo#">
                   where Usucodigo = #Arguments.Usucodigo#
                 </cfquery>
                 <cfset Lvar_Iid = Arguments.Usucodigo>
              
             <cfelse>
                 <cfquery name="rsInsert" datasource="#Arguments.Conexion#" result="res">
-                    insert into menus (	  
+                    insert into Usuarios (	  
 							  Cedula
 							  , Nombre
 							  , Apellido1
@@ -58,7 +57,7 @@
 							  , Clave
 							  , Correo
 							  , FechaAlta
-							  , Usucodigo
+							  , BMUsucodigo
 							  , FechaCambio
                             )
                     values(	  
@@ -66,10 +65,8 @@
 							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Nombre#">
 							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Apellido1#">
 							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Apellido2#">
-							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Correo#">
-							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Clave#">
-
-
+							, <cfqueryparam cfsqltype="cf_sql_varchar"   value="#Arguments.Clave#">
+                            , <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Correo#">
 							, CURRENT_DATE()
 							, <cfqueryparam cfsqltype="cf_sql_numeric" 	value="#session.Usucodigo#">
                             , CURRENT_DATE() 

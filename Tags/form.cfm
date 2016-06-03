@@ -8,7 +8,9 @@
 		<form name="<cfoutput>#Attributes.Name#</cfoutput>" 
 				id="<cfoutput>#Attributes.Name#</cfoutput>" 
 			action="<cfoutput>#Attributes.action#</cfoutput>" 
-			 class="<cfoutput>#Attributes.class#</cfoutput>">	
+			 class="<cfoutput>#Attributes.class#</cfoutput>"
+			 method="<cfoutput>#Attributes.method#</cfoutput>">		
+
 </cfcase>
 
 <cfcase value="end">

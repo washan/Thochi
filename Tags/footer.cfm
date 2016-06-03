@@ -33,6 +33,10 @@
 			<!--flaty scripts-->
 			<script src="#Application.RootTemplate#/js/flaty.js"></script>
 			<script src="#Application.RootTemplate#/js/flaty-demo-codes.js"></script>
+
+			<script type="text/javascript" src="#Application.RootTemplate#/assets/jquery-validation/dist/jquery.validate.min.js"></script>
+			<script type="text/javascript" src="#Application.RootTemplate#/assets/jquery-validation/dist/additional-methods.min.js"></script>
+
 		</cfoutput>
     </body>
 </html>
