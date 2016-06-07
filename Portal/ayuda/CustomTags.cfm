@@ -3,7 +3,7 @@
 		<div class="row">
         	<div class="col-md-12">
 				<cf_tabs>
-					<cf_tab id="A" name="A" active="true"><cfset SinTags()></cf_tab>
+					<cf_tab id="A" name="A" active="true"><cfset SinTags()> </cf_tab>
 					<cf_tab id="B" name="B"><cfset TagsB()></cf_tab>
 					<cf_tab id="C" name="C"><cfset SinTags()></cf_tab>
 					<cf_tab id="D" name="D"><cfset TagsD()></cf_tab>
