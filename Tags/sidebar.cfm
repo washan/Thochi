@@ -37,7 +37,7 @@
 			<!-- BEGIN Submenu -->
 			<ul class="submenu">
 				<li><a href="/Portal/seguridad/Usuario.cfm">Usuarios</a></li>
-				<li><a href="/Portal/seguridad/Menu.cfm">Definición Opciones Menu Sistema</a></li>
+				<li><a href="/Portal/seguridad/Menu.cfm">Menu Sistema</a></li>
 				<li><a href="/Portal/seguridad/Roles.cfm">Roles del Sistema</a></li>
 				<li><a href="ui_general.html">Usuarios y Permisos</a></li>
 			</ul>
@@ -47,13 +47,13 @@
 		<li>
 			<a href="#" class="dropdown-toggle">
 				<i class="fa fa-desktop"></i>
-				<span>Acciones</span>
+				<span>Ayuda</span>
 				<b class="arrow fa fa-angle-right"></b>                        
 			</a>
 
 			<!-- BEGIN Submenu -->
 			<ul class="submenu">
-				<li><a href="ui_general.html">Admisión de Estudiantes</a></li>
+				<li><a href="/Portal/ayuda/CustomTags.cfm">Customs Tags</a></li>
 			</ul>
 			<!-- END Submenu -->
 		</li>
