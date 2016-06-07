@@ -60,6 +60,7 @@
 				</cfif>
 				<cfloginuser name = "#cflogin.name#" password = "#cflogin.password#" roles = "#roles#"/>
 				<cfset session.Usucodigo = rsUsuario.Usucodigo>
+				<cfset Session.started   = now()>
 			</cfif>
 		</cflogin>
 		<cfif isdefined('URL.Logout')>
@@ -91,7 +92,12 @@
         <!--- Return out. --->
         <cfreturn />
     </cffunction>
- 
+ 	
+	<cffunction name="onSessionStart"> 
+	
+		
+			
+	</cffunction>
  
     <cffunction
         name="OnSessionEnd"
