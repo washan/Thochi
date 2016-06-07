@@ -13,7 +13,6 @@
 	<script src="#Application.RootTemplate#/assets/flot/jquery.flot.pie.js"></script>
 	<script src="#Application.RootTemplate#/assets/flot/jquery.flot.stack.js"></script>
 	<script src="#Application.RootTemplate#/assets/flot/jquery.flot.crosshair.js"></script>
-	<script src="#Application.RootTemplate#/assets/flot/jquery.flot.tooltip.min.js"></script>
 	<script src="#Application.RootTemplate#/assets/sparkline/jquery.sparkline.min.js"></script>
 	
 	<!--Sistema de grillas-->
