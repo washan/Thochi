@@ -205,22 +205,27 @@
 			<ul class="dropdown-menu dropdown-navbar" id="user_menu">
 				<li class="nav-header">
 					<i class="fa fa-clock-o"></i>
-						En session desde 8:45 am                        
+						Desde las <cfoutput>#TimeFormat(Session.started)#</cfoutput>                    
 					</li>
 				<li>
 					<a href="#">
 						<i class="fa fa-cog"></i>
-						Account Settings                            </a>                        </li>
+						Configuración                           
+					</a>                        
+				</li>
 
 				<li>
 					<a href="#">
 						<i class="fa fa-user"></i>
-						Edit Profile                            </a>                        </li>
+						 Perfil
+					</a>                        
+				</li>
 
 				<li>
 					<a href="#">
 						<i class="fa fa-question"></i>
-						Help                            </a>                        </li>
+						Ayuda                            
+					</a>                        </li>
 
 				<li class="divider visible-xs"></li>
 
@@ -243,9 +248,11 @@
 				<li class="divider"></li>
 
 				<li>
-					<a href="#">
+					<a href="/Public/debug.cfm?logout">
 						<i class="fa fa-off"></i>
-						Salir                            </a>                        </li>
+						Salir                            
+					</a>                        
+				</li>
 			</ul>
 			<!-- BEGIN User Dropdown -->
 		</li>
