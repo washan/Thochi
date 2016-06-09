@@ -12,10 +12,8 @@
 <cfparam name="Attributes.ButtonRefresh"  	default="true" /> 			<!---Coloca el boton de Refrescar--->
 <cfparam name="Attributes.checkbox"  		default="true" />			<!---true: Coloca checkbox, false: No coloca checkbox---> 
 <cfparam name="Attributes.key"  			default="" />				<!---Campos llave para pasar informacion---> 
-<cfparam name="caller.namecols" 			default="" />
-<cfparam name="caller.headercols" 			default="" />
-
-
+<cfparam name="Attributes.NameReport"  		default="Reporte de #Attributes.title#" />				<!---Nombre del reporte---> 
+<cfparam name="caller.col" 					default="#ArrayNew(1)#" />
 
 <cfswitch expression="#ThisTag.ExecutionMode#">
 	<!--- Start tag processing --->
@@ -53,7 +51,7 @@
 							</div>
 							<div class="btn-group">
 								<cfif Attributes.ButtonPrint>
-									<a class="btn btn-circle show-tooltip" title="Print" href="#"><i class="fa fa-print"></i></a>
+									<a class="btn btn-circle show-tooltip" title="Print" data-toggle="modal" data-target="#Modal<cfoutput>#Attributes.Nombre#</cfoutput>" href="#"><i class="fa fa-print"></i></a>
 								</cfif>
 								<cfif Attributes.ButtonPdf>
 									<a class="btn btn-circle show-tooltip" title="Export to PDF" href="#"><i class="fa fa-file-text-o"></i></a>
@@ -82,8 +80,10 @@
 						<cfif Attributes.checkbox>
 							<th style="width:18px"><input type="checkbox"/></th>
 						</cfif>
-						<cfloop list="#caller.headercols#" index="ccol">
-							<th class="text-center"><cfoutput>#ccol#</cfoutput></th>
+						<cfloop array="#caller.col#" index="ArrayCol"> 
+							<cfif ArrayCol.List>
+								<th class="text-center"><cfoutput>#ArrayCol.header#</cfoutput></th>
+							</cfif>
 						</cfloop>
 					</tr>
 				</thead>
@@ -96,14 +96,16 @@
 								value="<cfoutput>#EVALUATE(x)#</cfoutput>"/></td>
 							</cfif>
 							
-								<cfloop list="#caller.namecols#" index="ccol">
-									<td class="text-center">
-										<cfif not isdefined('Attributes.query.' & ccol)>
-											No definido
-										<cfelse>
-											<cfoutput>#Evaluate('Attributes.query.' & ccol)#</cfoutput>
-										</cfif>
-									</td>
+								<cfloop array="#caller.col#" index="ArrayCol"> 
+									<cfif ArrayCol.List>
+										<td class="text-center">
+											<cfif not isdefined('Attributes.query.' & ArrayCol.name)>
+												No definido
+											<cfelse>
+												<cfoutput>#Evaluate('Attributes.query.' & ArrayCol.name)#</cfoutput>
+											</cfif>
+										</td>
+									</cfif>
 								</cfloop>
 						</tr>
 					</cfloop>
@@ -116,6 +118,58 @@
 		</div>
 		<input name="Action" id="Action" type="hidden" value="New"/>
 		</form>
+		<!---Reporte--->
+		
+			<!-- Modal -->
+			<div id="Modal<cfoutput>#Attributes.Nombre#</cfoutput>" class="modal fade" role="dialog">
+			  <div class="modal-dialog">
+			
+				<!-- Modal content-->
+				<div class="modal-content">
+				  <div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title text-center"><cfoutput>#Attributes.NameReport#</cfoutput></h4>
+				  </div>
+				  <div class="modal-body">
+						<!---Contenido reporte--->
+							<table class="table">
+                                    <thead>
+                                        <tr>
+                                           <cfloop array="#caller.col#" index="ArrayCol"> 
+										   		<cfif ArrayCol.Report>
+													<th><cfoutput>#ArrayCol.header#</cfoutput></th>
+												</cfif>
+											</cfloop>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+										<cfloop query="Attributes.query">
+											<tr>
+											  <cfloop array="#caller.col#" index="ArrayCol"> 
+											  	<cfif ArrayCol.Report>
+													<td>
+														<cfif not isdefined('Attributes.query.' & ArrayCol.name)>
+															No definido
+														<cfelse>
+															<cfoutput>#Evaluate('Attributes.query.' & ArrayCol.name)#</cfoutput>
+														</cfif>
+													</td>
+												</cfif>
+											</cfloop>
+											</tr>
+										</cfloop>
+                                    </tbody>
+                                </table>
+						<!------>
+				  </div>
+				  <div class="modal-footer">
+				  	<button type="button" class="btn btn-print" data-dismiss="modal">Imprimir</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			
+			  </div>
+			</div>
 		<script language="javascript" type="text/javascript">
 			function New<cfoutput>#Attributes.Nombre#</cfoutput>(){
 				document.Listado.Action.value = 'New';
