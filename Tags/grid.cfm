@@ -112,7 +112,7 @@
 				</div>
 					</div>
 				</div>
-			</div
+			</div>
 		</div>
 		<input name="Action" id="Action" type="hidden" value="New"/>
 		</form>

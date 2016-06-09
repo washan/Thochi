@@ -2,14 +2,14 @@
 * Theme Name:  FLATY
 * Description: FLATY - Premium Responsive Admin Template
 * Author:      ShaMSofT
-* Version:     2.2.0
+* Version:     2.2.3
 */
 
 /* ========================================================
    General
 ======================================================== */
 /* Import Font */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
+@import url(//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700);
 
 html {
     min-height: 100%;
@@ -68,9 +68,6 @@ a:hover,
 a:focus,
 a:active {
     text-decoration: none;
-}
-a:active {
-    background-color: transparent;
 }
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Open Sans';
@@ -858,10 +855,14 @@ hr.margin-0  {margin: 0;}
     float: left;
     height: 40px;
 }
+#nav-horizontal.collapse.in {
+    height: auto;
+}
 #nav-horizontal > li {
     padding-right: 0;
     display: inline-block;
     vertical-align: top;
+    max-height: 999px;
 }
 #nav-horizontal > li > a {
     line-height: 40px;
@@ -929,6 +930,7 @@ hr.margin-0  {margin: 0;}
 }
 
 .box .box-title {
+    position: relative;
     padding: 10px;
 }
 
@@ -943,6 +945,9 @@ hr.margin-0  {margin: 0;}
     margin-right: 10px;
 }
 .box .box-title .box-tool {
+    position: absolute;
+	top: 10px;
+	right: 10px;
     display: inline-block;
     float: right;
     line-height: 20px;
@@ -988,6 +993,9 @@ hr.margin-0  {margin: 0;}
 ** Tab
 *******/
 .box-title .nav-tabs {
+    position: absolute;
+    top: 10px;
+    right: 5px;
     border-bottom: 0;
     margin: 0;
     margin-right: 10px;
@@ -2461,6 +2469,11 @@ a.tile:hover {
 .tile-magenta    {background-color: #8b4787;}
 .tile-green      {background-color: #31a221;}
 .tile-lime       {background-color: #65b11d;}
+.tile-gray       {background-color: #888;}
+.tile-black      {background-color: #000;}
+.tile-white      {background-color: #fff; color: #444!important;}
+.tile-yellow     {background-color: #f3d240;}
+.tile-brown      {background-color: #b5a291;}
 
 /* Tabs ------------------------------------------ */
 .tabbable {
@@ -2906,23 +2919,41 @@ a.tile:hover {
     color: #999;
     float: right;
 }
-.messages.messages-stripped > li:nth-child(odd) > div        {background-color: #eef1f4;}
-.messages.messages-stripped > li:nth-child(odd) > div:before {border-right-color: #eef1f4;}
-.messages.messages-zigzag > li:nth-child(even) > img {
+.messages.messages-stripped > li:nth-child(odd) > div,
+.messages.messages-chatty > li.right > div {
+    background-color: #eef1f4;
+}
+.messages.messages-stripped > li:nth-child(odd) > div:before {
+    border-right-color: #eef1f4;
+}
+.messages.messages-zigzag > li:nth-child(even) > img,
+.messages.messages-chatty > li.right > img {
     float: right;
 }
-.messages.messages-zigzag > li:nth-child(even) > div {
+.messages.messages-zigzag > li:nth-child(even) > div,
+.messages.messages-chatty > li.right > div {
     margin-right: 80px;
     margin-left: 0;
 }
-.messages.messages-zigzag > li:nth-child(even) > div:before {
+.messages.messages-zigzag > li:nth-child(even) > div:before,
+.messages.messages-chatty > li.right > div:before {
     right: -10px;
     left: auto;
     border-left: 10px solid #f7f8f9;
     border-right: 0;
 }
-.messages.messages-zigzag > li:nth-child(even) > div h5    {float: right;}
-.messages.messages-zigzag > li:nth-child(even) > div .time {float: none;}
+.messages.messages-chatty > li.right > div:before {
+    border-left-color: #eef1f4;
+}
+.messages.messages-zigzag > li:nth-child(even) > div h5,
+.messages.messages-zigzag > li.right > div h5 {
+    float: right;
+}
+.messages.messages-zigzag > li:nth-child(even) > div .time,
+.messages.messages-zigzag > li.right > div .time {
+    float: none;
+}
+
 .messages.messages-chat > li > div {
     padding-top: 0;
     padding-bottom: 2px;
@@ -3212,6 +3243,7 @@ a.tile:hover {
     background-color: #fff;
     margin-bottom: 1px;
     padding: 10px;
+    position: relative;
 }
 .mail-toolbar > li {
     display: inline-block;
@@ -3248,6 +3280,9 @@ a.tile:hover {
     color: #bbb;
     font-style: italic;
     white-space: nowrap;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 .mail-toolbar > .mail-pagination [class*="fa-"] {
     font-size: 14px;
@@ -3351,6 +3386,7 @@ a.tile:hover {
 .mail-msg-header {
     border-bottom: 1px solid #eee;
     padding: 10px 0;
+    position: relative;
 }
 .mail-msg-header > img {
     border-radius: 100%;
@@ -3362,6 +3398,9 @@ a.tile:hover {
     float: right;
     margin-left: 15px;
     line-height: 40px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
 }
 .mail-msg-header .msg-collapse a > [class*="fa-"] {
     font-size: 20px;
@@ -3382,6 +3421,9 @@ a.tile:hover {
     float: right;
     text-align: right;
     margin-top: 0;
+    position: absolute;
+    top: 10px;
+    right: 40px;
 }
 .mail-msg-header .msg-options a {
     color: #777;
@@ -3581,6 +3623,12 @@ a.tile:hover {
 }
 .chosen-container.chosen-container-single-nosearch .chosen-results {
     margin-top: 4px;
+}
+.chosen-container-multi .chosen-choices li.search-field input[type=text] {
+    height: 25px;
+}
+.has-error .chosen-single {
+    border-color: #a64240!important;
 }
 
 /* Slider ------------------------------------------ */
@@ -4008,6 +4056,7 @@ div.tagsinput .not_valid {
     vertical-align: middle;
     background-color: #fff;
     border: 1px solid #cccccc;
+    margin-bottom: 10px;
 }
 #event_box .label {
     display: inline-block;
@@ -4366,6 +4415,17 @@ div.tagsinput .not_valid {
     margin-top: 20px;
 }
 #main-content > footer p {
+    text-align: center;
+    color: #222;
+}
+
+.login-wrapper > footer {
+    background: #fff;
+    padding: 12px 20px 3px;
+    width: 340px;
+    margin: 30px auto 0 auto;
+}
+.login-wrapper > footer p {
     text-align: center;
     color: #222;
 }
@@ -5920,5 +5980,62 @@ div.tagsinput .not_valid {
         margin-bottom: 0;
     }
 }
+
+
+/* ========================================================
+   Navbar
+======================================================== */
+.navbar-default {
+	background-color: #f8f8f8;
+	position: relative;
+	min-height: 50px;
+	height: auto;
+	z-index: 0;
+	margin-bottom: 20px;
+	border: 1px solid #e7e7e7;
+}
+.navbar-default .navbar-brand {
+	color: #777;
+	font-size: 18px;
+	padding: 15px 15px;
+	min-width: 0;
+	height: auto;
+}
+.navbar-default  .navbar-collapse {
+	padding-right: 15px;
+	padding-left: 15px;
+	border-top: 1px solid #e7e7e7;
+	-webkit-overflow-scrolling: touch;
+}
+.navbar-default  .navbar-nav {
+	margin: 7.5px -15px!important;
+}
+.navbar-default .navbar-nav > li > a {
+	color: #777;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+	color: #333;
+	background-color: transparent;
+}
+.navbar-default .dropdown-menu > li:hover {
+	background-color: transparent;
+}
+@media (min-width: 768px)
+{
+	.navbar-default  .navbar-nav {
+		margin: 0!important;
+	}
+}
+
+/*
+Fixes for BS 3.2
+*/
+.controls > label.radio > input[type="radio"],
+.controls > label.checkbox > input[type="checkbox"] {
+    margin-left: 0;
+    position: static;
+}
+
 
 

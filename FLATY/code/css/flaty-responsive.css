@@ -50,6 +50,9 @@
     #nav-horizontal.collapse {
         display: none!important;
     }
+    #nav-horizontal.collapse.in {
+        display: block!important;
+    }
     #nav-horizontal a {
         font-size: 13px;
     }
@@ -138,6 +141,11 @@
     #nav-horizontal > li > a > b[class*="fa fa-"] {
         float: right;
         line-height: 33px;
+    }
+    @-moz-document url-prefix() { 
+      #nav-horizontal > li > a > b[class*="fa fa-"] {
+        margin-top: -33px;
+      }
     }
 }
 
@@ -330,6 +338,25 @@
         margin-left: 40px;
     }
 
+}
+
+@media (max-width: 320px) {
+    .navbar .navbar-btn:focus,
+    .navbar .navbar-btn {
+        margin-right: 5px;
+    }
+    .navbar .navbar-brand {
+        max-width: 190px;
+        min-width: 150px;
+        font-size: 15px;
+    }
+    .login-page .login-wrapper form,
+    .error-page .error-wrapper {
+        width: 300px;
+    }
+    .error-page h5 > span {
+        font-size: 45px;
+    }
 }
 
 

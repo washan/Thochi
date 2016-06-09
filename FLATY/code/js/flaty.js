@@ -43,12 +43,82 @@ $(function() {
     handleUserLayoutSetting();
 
     //Disable certain links
-    $('a[href^=#]').click(function (e) {
+    $('a[href=#]').click(function (e) {
         e.preventDefault()
     });
 
     //slimScroll to fixed height tags
     $('.nice-scroll, .slimScroll').slimScroll({touchScrollStep: 30});
+
+    //---------------- Tooltip & Popover --------------------//
+    $('.show-tooltip').tooltip({container: 'body', delay: {show:500}});
+    $('.show-popover').popover();
+
+    //---------------- Syntax Highlighter --------------------//
+    window.prettyPrint && prettyPrint();
+
+    //----------------------- Chosen Select ---------------------//
+    if (jQuery().chosen) {
+        $(".chosen").chosen({
+            no_results_text: "Oops, nothing found!",
+            width: "100%"
+        });
+
+        $(".chosen-with-diselect").chosen({
+            allow_single_deselect: true,
+            width: "100%"
+        });
+    }
+    
+    //--------------- Password Strength Indicator ----------------//
+    if (jQuery().pwstrength) {
+        $('input[data-action="pwindicator"]').pwstrength();
+    }
+
+    //----------------- Bootstrap Dual Listbox -------------------//
+    if (jQuery().bootstrapDualListbox) {
+        $('select[data-action="duallistbox"]').bootstrapDualListbox();
+    }
+
+    //----------------------- Colorpicker -------------------------//
+    if (jQuery().colorpicker) {
+        $('.colorpicker-default').colorpicker({
+            format: 'hex'
+        });
+        $('.colorpicker-rgba').colorpicker();
+    }
+
+    //----------------------- Time Picker -------------------------//
+    if (jQuery().timepicker) {
+        $('.timepicker-default').timepicker();
+        $('.timepicker-24').timepicker({
+            minuteStep: 1,
+            showSeconds: true,
+            showMeridian: false
+        });
+    }
+    
+    //------------------------ Date Picker ------------------------//
+    if (jQuery().datepicker) {
+        $('.date-picker').datepicker();
+    }
+
+    //------------------------ Date Range Picker ------------------------//
+    if (jQuery().daterangepicker) {
+        //Date Range Picker
+        $('.date-range').daterangepicker();
+    }
+
+    //------------------------ Bootstrap WYSIWYG Editor -----------------//
+    if (jQuery().wysihtml5) {
+        $('.wysihtml5').wysihtml5();
+    }
+
+    //---------------------------- prettyPhoto -------------------------------//
+    if (jQuery().prettyPhoto) {
+        $(".gallery a[rel^='prettyPhoto']").prettyPhoto({social_tools:'', hideflash: true});
+    }
+
 
     //Add animation to notification and messages icon, if they have any new item
     var badge = $('.flaty-nav .dropdown-toggle > .fa-bell + .badge')
@@ -59,13 +129,6 @@ $(function() {
     if ($(badge).length > 0 && parseInt($(badge).html()) > 0) {
         $('.flaty-nav .dropdown-toggle > .fa-envelope').addClass('anim-top-down');
     }
-
-    //---------------- Tooltip & Popover --------------------//
-    $('.show-tooltip').tooltip({container: 'body', delay: {show:500}});
-    $('.show-popover').popover();
-
-    //---------------- Syntax Highlighter --------------------//
-    window.prettyPrint && prettyPrint();
 
     //---------------- Sidebar -------------------------------//
     //Scrollable fixed sidebar
@@ -123,6 +186,10 @@ $(function() {
         }
     });
 
+    $('#sidebar').on('show.bs.collapse', function () {
+        $("html, body").animate({ scrollTop: 0 }, 100);
+    });
+
     //Search Form
     $('#sidebar .search-form').click(function(){
         $('#sidebar .search-form input[type="text"]').focus();
@@ -160,11 +227,21 @@ $(function() {
                 arrow.addClass('anim-turn-90');
             }
         }
+        
         if ($('#nav-horizontal.nav-xs').size() == 0) {
             $('#nav-horizontal > li > .dropdown-menu').not(submenu).slideUp(400);
         }
+
         submenu.slideToggle(400, function(){
+            if ($('#nav-horizontal.nav-xs').size() == 0 && !$(submenu).is(":hidden")) {
+                $(this).prev(".dropdown-backdrop").on('click', function() {
+                    submenu.slideToggle(400);
+                });
+            }
+            
             if ($('#nav-horizontal.nav-xs').size() > 0) {
+                $(this).prev(".dropdown-backdrop").remove();
+
                 if($(this).is(":hidden")) {
                     arrow.attr('class', 'arrow fa fa-angle-right');
                 } else {
@@ -173,7 +250,10 @@ $(function() {
                 arrow.removeClass('anim-turn90').removeClass('anim-turn-90');
             }
         });
+
     });
+
+
 
     //------------------ Theme Setting --------------------//
     //Toggle showing theme setting box
@@ -428,63 +508,6 @@ $(function() {
         });
     }
 
-    //----------------------- Chosen Select ---------------------//
-    if (jQuery().chosen) {
-        $(".chosen").chosen({
-            no_results_text: "Oops, nothing found!",
-            width: "100%"
-        });
-
-        $(".chosen-with-diselect").chosen({
-            allow_single_deselect: true,
-            width: "100%"
-        });
-    }
-    
-    //--------------- Password Strength Indicator ----------------//
-    if (jQuery().pwstrength) {
-        $('input[data-action="pwindicator"]').pwstrength();
-    }
-
-    //----------------- Bootstrap Dual Listbox -------------------//
-    if (jQuery().bootstrapDualListbox) {
-        $('select[data-action="duallistbox"]').bootstrapDualListbox();
-    }
-
-    //----------------------- Colorpicker -------------------------//
-    if (jQuery().colorpicker) {
-        $('.colorpicker-default').colorpicker({
-            format: 'hex'
-        });
-        $('.colorpicker-rgba').colorpicker();
-    }
-
-    //----------------------- Time Picker -------------------------//
-    if (jQuery().timepicker) {
-        $('.timepicker-default').timepicker();
-        $('.timepicker-24').timepicker({
-            minuteStep: 1,
-            showSeconds: true,
-            showMeridian: false
-        });
-    }
-    
-    //------------------------ Date Picker ------------------------//
-    if (jQuery().datepicker) {
-        $('.date-picker').datepicker();
-    }
-
-    //------------------------ Date Range Picker ------------------------//
-    if (jQuery().daterangepicker) {
-        //Date Range Picker
-        $('.date-range').daterangepicker();
-    }
-
-    //------------------------ Bootstrap WYSIWYG Editor -----------------//
-    if (jQuery().wysihtml5) {
-        $('.wysihtml5').wysihtml5();
-    }
-
     //------------------------------ Form validation --------------------------//
     if (jQuery().validate) {
         var removeSuccessClass = function(e) {
@@ -496,6 +519,8 @@ $(function() {
             errorPlacement: function(error, element) {
                 if(element.parent('.input-group').length) {
                     error.insertAfter(element.parent());
+                } else if (element.next('.chosen-container').length) {
+                    error.insertAfter(element.next('.chosen-container'));
                 } else {
                     error.insertAfter(element);
                 }
@@ -504,7 +529,12 @@ $(function() {
             ignore: "",
 
             invalidHandler: function (event, validator) { //display error alert on form submit              
-                
+                var el = $(validator.errorList[0].element);
+                if ($(el).hasClass('chosen')) {
+                    $(el).trigger('chosen:activate');
+                } else {
+                    $(el).focus();
+                }
             },
 
             highlight: function (element) { // hightlight error inputs
@@ -520,11 +550,6 @@ $(function() {
                 label.closest('.form-group').removeClass('has-error').addClass('has-success'); // set success class to the control group
             }
         });
-    }
-
-    //---------------------------- prettyPhoto -------------------------------//
-    if (jQuery().prettyPhoto) {
-        $(".gallery a[rel^='prettyPhoto']").prettyPhoto({social_tools:'', hideflash: true});
     }
 
 });

@@ -204,9 +204,11 @@
 			<!---BEGIN User Dropdown--->
 			<ul class="dropdown-menu dropdown-navbar" id="user_menu">
 				<li class="nav-header">
-					<i class="fa fa-clock-o"></i>
-						Desde las <cfoutput>#TimeFormat(Session.started)#</cfoutput>                    
-					</li>
+					<cfif isdefined('Session.started')>
+						<i class="fa fa-clock-o"></i>
+							Desde las <cfoutput>#TimeFormat(Session.started)#</cfoutput>   
+						</li>
+					</cfif>  
 				<li>
 					<a href="#">
 						<i class="fa fa-cog"></i>

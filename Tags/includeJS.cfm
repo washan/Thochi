@@ -1,8 +1,8 @@
 ﻿<cfoutput>
 
 	<!--basic scripts-->
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-	<script>window.jQuery || document.write('<script src="#Application.RootTemplate#/assets/jquery/jquery-2.0.3.min.js"><\/script>')</script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="#Application.RootTemplate#/assets/jquery/jquery-2.1.4.min.js"><\/script>')</script>
 	<script src="#Application.RootTemplate#/assets/bootstrap/js/bootstrap.min.js"></script>
 	<script src="#Application.RootTemplate#/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 	<script src="#Application.RootTemplate#/assets/jquery-cookie/jquery.cookie.js"></script>
