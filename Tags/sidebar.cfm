@@ -20,6 +20,59 @@
 			</a>                    
 		</li>
 
+		<cfquery name="rsMenu" datasource="thochi">
+			select distinct c.MenuId, c.Titulo, c.URLinicial
+			from UsuarioRoles a
+			inner join RolMenu b
+				on b.RolesId = b.RolesId
+			inner join Menus c
+				on c.MenuId = b.MenuId
+				and c.Nivel = 0
+				and coalesce(MenuIdPadre,-1) = -1
+			where a.Usucodigo = #session.Usucodigo#
+			order by c.orden,c.Titulo
+		</cfquery>
+
+		<!--- ***************************** --->
+		<!---Configuracion--->
+	 	<cfloop query="rsMenu">
+			<cfoutput>
+
+			<cfquery name="rsSubMenu" datasource="thochi">
+				select c.Titulo, c.URLinicial,c.MenuIdPadre,c.MenuId, c.orden
+				from UsuarioRoles a
+				inner join RolMenu b
+					on b.RolesId = b.RolesId
+				inner join Menus c
+					on c.MenuId = b.MenuId
+					and coalesce(MenuIdPadre,-1) = #rsMenu.MenuId#
+				where a.Usucodigo = #session.Usucodigo#
+				order by c.orden,c.Titulo
+			</cfquery>
+
+				
+			<li>
+				<a href="##" class="dropdown-toggle">
+					<i class="fa fa-desktop"></i>
+					<span>#rsMenu.Titulo#</span>
+					<b class="arrow fa fa-angle-right"></b>                        
+				</a>
+
+				<!-- BEGIN Submenu -->
+				
+				<ul class="submenu">
+					<cfloop query="rsSubMenu">	
+						<li><a href="#rsSubMenu.URLinicial#">#rsSubMenu.Titulo#</a></li>
+					</cfloop>	
+				</ul>
+				
+				<!-- END Submenu -->
+			</li>
+			</cfoutput>
+		</cfloop> 
+
+		<!--- *****************************--->
+
 		<li>
 			<a href="typography.html">
 				<i class="fa fa-text-width"></i>

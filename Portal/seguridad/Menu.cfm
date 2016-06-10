@@ -15,7 +15,7 @@
 			<cf_gridcolumn name="TituloP" 		report="true"	list="true"		header="Titulo Padre">
 			<cf_gridcolumn name="Codigo"	 	report="false"	list="true"		header="Codigo">
 			<cf_gridcolumn name="Titulo" 		report="true"	list="true"		header="Titulo">
-			<cf_gridcolumn name="Nivel" 		report="false"	list="false"	header="Nivel">
+			<cf_gridcolumn name="Nivel" 		report="false"	list="true"		header="Nivel">
 			<cf_gridcolumn name="URLinicial" 	report="false"	list="true"		header="URLinicial">
 			<cf_gridcolumn name="CodigoP" 		report="false"	list="true"		header="Codigo Padre">
 			<cf_gridcolumn name="Orden" 		report="false"	list="true"		header="Orden">

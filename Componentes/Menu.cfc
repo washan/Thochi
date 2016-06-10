@@ -17,7 +17,7 @@
             <cfif isdefined('Arguments.MenuId') and len(Arguments.MenuId) and not isdefined('Arguments.Codigo')>
                 where a.MenuId = <cfqueryparam cfsqltype="cf_sql_numeric" value="#arguments.MenuId#">
             </cfif>
-            order by a.Codigo
+            order by a.Nivel, a.Orden, a.Codigo
 		</cfquery>
 		<cfif Arguments.Debug>
 			<cfdump var="#Arguments#">
