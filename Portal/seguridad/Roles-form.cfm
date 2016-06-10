@@ -23,7 +23,7 @@
 				<input type="hidden" name="RolesId" value="#form.RolesId#">
 			</cfif>	
 			<div class="row">
-			    <div class="col-md-12">
+			    <div class="col-md-10">
 			        <div class="box box-blue">
 			            <div class="box-content">
 							<div class="form-group">
@@ -34,8 +34,14 @@
 							</div>
 			                <cfif isDefined('rsOpSistema')>
 				                <div class="form-group">
-									<label class="col-sm-3 col-lg-2 control-label">Opciones del Sistema</label>
-									<div class="col-sm-9 col-lg-10 controls">
+									<label class="col-sm-3 col-lg-5 control-label" align="center">Opciones del Sistema</label>
+									<label class="col-sm-3 col-lg-5 control-label" align="center">Opciones del Sistema Seleccionadas</label>
+								</div>
+
+				                <div class="form-group" align="center">
+									<!--- <label class="col-sm-3 col-lg-2 control-label">Opciones del Sistema</label> --->
+									<div class=" col-lg-1 controls" ></div>
+									<div class="col-sm-8 col-lg-10 controls" >
 				                        <select class="form-control col-md-12" data-action="duallistbox" multiple="multiple" name="OpSistema" id="OpSistema">
 				                            <cfloop query="rsOpSistema">
 				                            	<option value="#rsOpSistema.MenuId#" <cfif rsOpSistema.selected NEQ -1>
@@ -47,7 +53,7 @@
 				                </div>
 			                </cfif>
 				            <div class="form-group" align="center">
-								<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+								<div class="col-sm-9 col-sm-offset-3 col-lg-8 col-lg-offset-2">
 								   <button name="save" type="submit" class="btn btn-primary"><i class="fa fa-check"></i> Save</button>
 								   <button type="button" class="btn" onclick="location.href='Roles.cfm'">Cancel  </button>
 								</div>
@@ -58,4 +64,33 @@
 			</div>
 		</cfoutput>
 	</cf_form> 
+
+    <script language="JavaScript1.2" type="text/javascript">
+		function Aprueba(PCid){ 
+			var Aprueba = 1
+			var dataP = {
+				method: "EnviarTramite",
+				 PCid:  PCid,
+				 Aprueba:  Aprueba     
+				}
+
+                try {
+                    $.ajax ({
+                        type: "post",
+                        url: "/cfmx/ftec/Componentes/FTTramitesContratacion.cfc",
+                        data: dataP,
+                        dataType: "xml",
+                        async: false,
+                        cache: false,
+                        
+                        error:  function( objRequest, strError ){
+                            Status = 1; 
+                        }
+                    });
+                } catch(ss){
+                    alert('FALLO Inesperado');
+                }
+                $('form[name=fmContratacion]').submit();                
+		}
+    </script>
 <cf_endBox>

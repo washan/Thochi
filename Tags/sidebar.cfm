@@ -39,7 +39,7 @@
 				<li><a href="/Portal/seguridad/Usuario.cfm">Usuarios</a></li>
 				<li><a href="/Portal/seguridad/Menu.cfm">Menu Sistema</a></li>
 				<li><a href="/Portal/seguridad/Roles.cfm">Roles del Sistema</a></li>
-				<li><a href="/Portal/seguridad/UsuarioRoles-form.cfm">Usuarios y Permisos</a></li>
+				<li><a href="/Portal/seguridad/UsuarioRoles.cfm">Usuarios y Permisos</a></li>
 			</ul>
 			<!-- END Submenu -->
 		</li>
