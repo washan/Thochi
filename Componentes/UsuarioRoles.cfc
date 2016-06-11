@@ -35,6 +35,7 @@
 
 	<cffunction access="public" name="set" hint="Funcion Actualizar los roles asociados al usuario">
         <cfargument name="RolesId" 	required="true" 	type="any">
+        <cfargument name="InsId"    required="true"     type="any">
         <cfargument name="UsuRoll"  required="false"    type="any">
 
         <cfargument name="Debug" 	required="false" 	type="boolean" 	default="false">     
@@ -48,11 +49,13 @@
             <cfif isdefined('Arguments.RolesId')>
                 <cfinvoke component="Componentes.UsuarioRoles" method="delete">
                     <cfinvokeargument name="RolesId"        value="#arguments.RolesId#">
+                    <cfinvokeargument name="InsId"          value="#arguments.RolesId#">
                 </cfinvoke>
             
                 <cfif isDefined('Arguments.UsuRoll') and LEN(TRIM(Arguments.UsuRoll))>
                     <cfinvoke component="Componentes.UsuarioRoles" method="setRoll">
-                        <cfinvokeargument name="RolesId"        value="#arguments.RolesId#">
+                        <cfinvokeargument name="RolesId"      value="#arguments.RolesId#">
+                        <cfinvokeargument name="InsId"        value="#arguments.InsId#">
                         <cfinvokeargument name="UsuRoll"      value="#arguments.UsuRoll#">
                     </cfinvoke>
                 </cfif>       
@@ -69,6 +72,7 @@
 			 <cfquery datasource="#arguments.Conexion#">
                 delete from Usuarioroles
                 where RolesId in  (<cfqueryparam cfsqltype="cf_sql_numeric" value="#Arguments.RolesId#" list="true">)
+                    and InsId = <cfqueryparam cfsqltype="cf_sql_numeric" value="#Arguments.InsId#">
             </cfquery>	
         </cftransaction>
         <cfreturn>
@@ -77,6 +81,7 @@
     <cffunction access="public" name="setRoll" returntype="numeric"  hint="Funcion para Insertar o Actualizar las opciones de Menu - Roll para utilizar">
         <cfargument name="RolesId"      required="false"    type="any">
         <cfargument name="UsuRoll"      required="true"     type="Any">
+        <cfargument name="InsId"        required="true"     type="Any">
         <cfargument name="Conexion"     required="false"    type="string"   default="thochi"> 
         <cfargument name="Debug"        required="false"    type="boolean"  default="false">     
         <cfargument name="Conexion"     required="false"    type="string"   default="thochi"> 
@@ -84,8 +89,9 @@
         <cftransaction>   
             <cfloop index="Usucodigo" list="#arguments.UsuRoll#"> 
                 <cfquery name="rsRolMenu" datasource="#Arguments.Conexion#" result="res">
-                    insert into Usuarioroles (RolesId, Usucodigo) 
+                    insert into Usuarioroles (RolesId, InsId, Usucodigo) 
                         values (<cfqueryparam cfsqltype="cf_sql_numeric"  value="#Arguments.RolesId#">
+                                , <cfqueryparam cfsqltype="cf_sql_numeric"  value="#InsId#">
                                 , <cfqueryparam cfsqltype="cf_sql_numeric"  value="#Usucodigo#">)
                 </cfquery>
             </cfloop>  

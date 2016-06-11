@@ -1,12 +1,19 @@
-<cfif isDefined('url.Rol') and len(url.Rol) >
+﻿<cfif isDefined('url.Rol') and len(url.Rol) >
 	<cfset form.RolesId = url.Rol>
 <cfelse>
 	<cfparam name="form.RolesId" default="0" />
+</cfif>
+<cfif isDefined('url.Inst') and len(url.Inst) >
+	<cfset form.InsId = url.Inst>
+<cfelse>
+	<cfparam name="form.RolesId" default="0" />
+	<cfparam name="form.InsId"   default="0" />
 </cfif>
 
 
 <cfinvoke component="Componentes.Roles" method="Get" returnvariable="rsRoles">
 <cfinvoke component="Componentes.Usuarios" method="Get" returnvariable="rsUsuarios">	
+<cfinvoke component="Componentes.Institucion" method="Get" returnvariable="rsInstituciones">	
 
 <cfinvoke component="Componentes.UsuarioRoles" method="get" returnvariable="rsUsuRol">
     <cfinvokeargument name="RolesId"        value="#form.RolesId#">
@@ -22,6 +29,23 @@
 			        <div class="box box-blue">
 			            <div class="box-content">
 			                <div class="form-group">
+								<label for="Institucion" class="col-xs-3 col-lg-2 control-label">Institución</label>
+								<div class="col-sm-9 col-lg-10 controls">
+									<select name="InsId" id="InsId" tabindex="1" class="form-control"> 
+										<option  title="" value="" >-- Seleccione Institución --</option>
+										<cfloop query="rsInstituciones">
+											<cfif isdefined('rsInstituciones.InsId') and rsInstituciones.InsId neq 0>
+												<option  title="#rsInstituciones.Nombre#" value="#rsInstituciones.InsId#" 
+												<cfif rsInstituciones.InsId eq form.InsId> selected </cfif>>
+													#rsInstituciones.Nombre#
+												</option>
+											</cfif>
+										</cfloop>
+									</select>
+								</div>
+							</div>
+
+							<div class="form-group">
 								<label for="Rol" class="col-xs-3 col-lg-2 control-label">Roles:</label>
 								<div class="col-sm-9 col-lg-10 controls">
 									<select name="RolesId" id="RolesId" tabindex="1" class="form-control" onchange="refresca(this.value);"> 
