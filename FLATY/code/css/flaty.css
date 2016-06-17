@@ -3131,7 +3131,7 @@ a.tile:hover {
 }
 /* Error ------------------------------------------ */
 .error-page {
-    padding: 80px 0;
+    padding: 0px 0;
 }
 .error-page:before {
     content: "";

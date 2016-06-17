@@ -16,7 +16,6 @@
         <cfreturn true />
     </cffunction>
  
- 
     <cffunction name="OnSessionStart" access="public" returntype="void" output="false" hint="Fires when the session is first created.">
  				
         <!--- Return out. --->
@@ -30,6 +29,11 @@
 		<!---Funcion para resetear las variables de Application--->
 		<cfif isdefined('URL.ResetApplication')>
 			<cfset OnApplicationStart()>
+		</cfif>
+		<cfif isdefined('URL.Logout')>
+			<cflogout>
+			<cflocation url="#application.Context#/Public/login.cfm" addtoken="no">
+			<cfabort>
 		</cfif>
 
  		<cflogin>
@@ -61,15 +65,11 @@
 				<cfloginuser name = "#cflogin.name#" password = "#cflogin.password#" roles = "#roles#"/>
 				<cfset session.Usucodigo = rsUsuario.Usucodigo>
 				<cfset Session.started   = now()>
+			
 			</cfif>
 		</cflogin>
-		<cfif isdefined('URL.Logout')>
-			<cflogout>
-			<cflocation url="#application.Context#/Public/login.cfm" addtoken="no">
-			<cfabort>
-			
-		</cfif>
 		
+			
         <!--- Return out. --->
         <cfreturn true />
     </cffunction>
@@ -175,8 +175,8 @@
 	<cffunction name="onMissingTemplate" returnType="boolean">
 		<cfargument type="string" name="targetPage" required=true/>
 	
-		<cfdump var="Fuente no encontrado"><cfabort>
-		<cfreturn false>
+		<cfinclude template="Portal/commons/404.cfm">
+		<cfreturn true>
 	</cffunction>
  
 </cfcomponent>
