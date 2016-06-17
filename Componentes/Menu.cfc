@@ -2,22 +2,19 @@
 
 	<cffunction access="public" name="get" returntype="query">
 		<cfargument name="Debug" 	type="boolean" required="false" 	default="false"> 
-		<cfargument name="Codigo" 	type="string"  required="false">
+		<!--- <cfargument name="Codigo" 	type="string"  required="false"> --->
         <cfargument name="MenuId"   type="numeric" required="false">
 
 		<cfquery name="rssql" datasource="#Application.Datasorce#">
-			select a.MenuId, a.Codigo, a.Titulo,a.Nivel, a.URLinicial, coalesce(a.MenuIdPadre,-1) as MenuIdPadre, a.Orden, a.IconFont
-				,b.Codigo as CodigoP, b.Titulo as TituloP
+			select a.MenuId, a.Titulo,a.Nivel, a.URLinicial, coalesce(a.MenuIdPadre,-1) as MenuIdPadre, a.Orden, a.IconFont
+				, b.Titulo as TituloP
 			from menus a
 			left join menus b 
 				on b.MenuId = a.MenuIdPadre
-			<cfif isdefined('Arguments.Codigo') and len(Arguments.Codigo) and not isdefined('Arguments.MenuId')>
-				where a.Codigo = <cfqueryparam cfsqltype="cf_sql_varchar" value="#arguments.Codigo#">
-			</cfif>
             <cfif isdefined('Arguments.MenuId') and len(Arguments.MenuId) and not isdefined('Arguments.Codigo')>
                 where a.MenuId = <cfqueryparam cfsqltype="cf_sql_numeric" value="#arguments.MenuId#">
             </cfif>
-            order by a.Nivel, a.Orden, a.Codigo
+            order by a.Nivel, a.Orden, a.Titulo
 		</cfquery>
 		<cfif Arguments.Debug>
 			<cfdump var="#Arguments#">
@@ -29,7 +26,6 @@
 
 	<cffunction access="public" name="set" returntype="numeric"  hint="Funcion para Insertar o Actualizar las opciones de Menu para utilizar">
         <cfargument name="MenuId" 		required="false" 	type="any">
-        <cfargument name="Codigo" 		required="true" 	type="string">
         <cfargument name="Titulo"   	required="true"     type="string">
         <cfargument name="Nivel" 		required="true" 	type="numeric" default="-1">
         <cfargument name="URLinicial" 	required="true" 	type="string">
@@ -47,8 +43,7 @@
             <cfif isdefined('Arguments.MenuId')>
                 <cfquery datasource="#Arguments.Conexion#" result="res">
                 	update menus set 
-                         Codigo     	= <cfqueryparam cfsqltype="cf_sql_varchar"  value="#Arguments.Codigo#">
-                        ,Titulo 		= <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Titulo#">
+                        Titulo 		= <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Titulo#">
                         ,Nivel 			= <cfqueryparam cfsqltype="cf_sql_numeric" 	value="#Arguments.Nivel#">
                         ,URLinicial		= <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.URLinicial#">
                         <cfif isDefined('arguments.MenuIdPadre') and len(arguments.MenuIdPadre)>
@@ -67,8 +62,7 @@
             <cfelse>
                 <cfquery name="rsInsert" datasource="#Arguments.Conexion#" result="res">
                     insert into menus (	  
-							  Codigo
-							, Titulo
+							Titulo
 							, Nivel
 							, URLinicial
 							, MenuIdPadre
@@ -79,8 +73,7 @@
 							, FechaCambio
                             )
                     values(	  
-							<cfqueryparam cfsqltype="cf_sql_varchar"  value="#Arguments.Codigo#">
-							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Titulo#">
+                             <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.Titulo#">
 							, <cfqueryparam cfsqltype="cf_sql_numeric" 	value="#Arguments.Nivel#">
 							, <cfqueryparam cfsqltype="cf_sql_varchar" 	value="#Arguments.URLinicial#">
                             <cfif isDefined('arguments.MenuIdPadre') and len(arguments.MenuIdPadre)>

@@ -21,7 +21,7 @@
 		</li>
 
 		<cfquery name="rsMenu" datasource="thochi">
-			select distinct c.MenuId, c.Titulo, c.URLinicial
+			select distinct c.MenuId, c.Titulo, c.URLinicial, coalesce(c.IconFont,'fa fa-desktop') as IconFont
 			from UsuarioRoles a
 			inner join RolMenu b
 				on b.RolesId = b.RolesId
@@ -39,7 +39,7 @@
 			<cfoutput>
 
 			<cfquery name="rsSubMenu" datasource="thochi">
-				select c.Titulo, c.URLinicial,c.MenuIdPadre,c.MenuId, c.orden
+				select c.Titulo, c.URLinicial,c.MenuIdPadre,c.MenuId, c.orden, coalesce(c.IconFont,'fa fa-desktop') as IconFont
 				from UsuarioRoles a
 				inner join RolMenu b
 					on b.RolesId = b.RolesId
@@ -49,11 +49,13 @@
 				where a.Usucodigo = #session.Usucodigo#
 				order by c.orden,c.Titulo
 			</cfquery>
+			
 
 				
 			<li>
 				<a href="##" class="dropdown-toggle">
-					<i class="fa fa-desktop"></i>
+					<!--- <i class="fa fa-desktop"></i> --->
+					<i class="#rsMenu.IconFont#"></i>
 					<span>#rsMenu.Titulo#</span>
 					<b class="arrow fa fa-angle-right"></b>                        
 				</a>
@@ -83,7 +85,7 @@
 		<li>
 			<a href="#" class="dropdown-toggle">
 				<i class="fa fa-desktop"></i>
-				<span>Configuración</span>
+				<span>Configuración Quemado</span>
 				<b class="arrow fa fa-angle-right"></b>                        
 			</a>
 
@@ -100,7 +102,7 @@
 		<li>
 			<a href="#" class="dropdown-toggle">
 				<i class="fa fa-desktop"></i>
-				<span>Ayuda</span>
+				<span>Ayuda Quemado</span>
 				<b class="arrow fa fa-angle-right"></b>                        
 			</a>
 
@@ -110,6 +112,7 @@
 			</ul>
 			<!-- END Submenu -->
 		</li>
+		<!--- opciones quemadas que se sustituyen con la consulta y subconsulta del menu 
 		<!---Consultas--->
 		<li>
 			<a href="#" class="dropdown-toggle">
@@ -283,6 +286,7 @@
 			</ul>
 			<!-- END Submenu -->
 		</li>
+		--->
 	</ul>
 	<!-- END Navlist -->
 

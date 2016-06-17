@@ -1,5 +1,4 @@
 <cfinvoke component="Componentes.Menu" method="set" returnvariable="LvarId">
-		<cfinvokeargument name="Codigo" 		value="#form.Codigo#">
 		<cfinvokeargument name="Titulo" 		value="#form.Titulo#">
 		<cfinvokeargument name="Nivel" 			value="#form.Nivel#">
 		<cfinvokeargument name="URLinicial" 	value="#form.URLinicial#">

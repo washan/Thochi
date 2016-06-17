@@ -16,12 +16,12 @@
 		<div class="row">
 			<div class="col-md-6 ">
 				<!--- BEGIN Left Side --->
-				<div class="form-group">
+				<!--- <div class="form-group">
 					<label for="Codigo" class="col-xs-3 col-lg-2 control-label">Código</label>
 					<div class="col-sm-9 col-lg-10 controls">
 						<input type="text" name="Codigo" id="Codigo" placeholder="Código opción menu" class="form-control" <cfif isDefined('rsMenus')>value="#rsMenus.Codigo#"</cfif> required>
 					</div>
-				</div>
+				</div> --->
 				
 				<div class="form-group">
 					<label for="Titulo" class="col-xs-3 col-lg-2 control-label">Titulo</label>
@@ -55,12 +55,12 @@
 							<option  title="" value="" >-- No Definido --</option>
 							<cfloop query="rsMenuPadre">
 								<cfif isdefined('rsMenus.MenuIdPadre') and rsMenus.MenuIdPadre neq -1>
-									<option  title="#rsMenuPadre.CodigoP#" value="#rsMenuPadre.MenuId#"
+									<option  title="#rsMenuPadre.TituloP#" value="#rsMenuPadre.MenuId#"
 										<cfif rsMenuPadre.MenuId eq rsMenus.MenuIdPadre> selected </cfif>>
 										#rsMenuPadre.Titulo#
 									</option>
 								<cfelse>
-									<option  title="#rsMenuPadre.Codigo#" value="#rsMenuPadre.MenuId#" >#rsMenuPadre.Titulo#</option>
+									<option  title="#rsMenuPadre.Titulo#" value="#rsMenuPadre.MenuId#" >#rsMenuPadre.Titulo#</option>
 								</cfif>
 							</cfloop>
 						</select>
