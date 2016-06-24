@@ -184,7 +184,7 @@
 					</a>                        </li>
 
 				<li class="more">
-					<a href="#">Ver todos</a>                        
+					<a href="/Portal/commons/Mail.cfm">Ver todos</a>                        
 				</li>
 			</ul>
 			<!--- END Notifications Dropdown--->
