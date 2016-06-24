@@ -9,9 +9,7 @@
 	<link rel="stylesheet" href="#Application.RootTemplate#/css/flaty.css">
 	<link rel="stylesheet" href="#Application.RootTemplate#/css/flaty-responsive.css">
 	<link rel="stylesheet" href="#Application.RootTemplate#/assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.css" />
-
+	<link rel="stylesheet" href="#Application.RootTemplate#/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css" />
 	<link rel="shortcut icon" href="#Application.Context#/img/books.ico">
-
-
 
 </cfoutput>

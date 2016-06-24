@@ -19,6 +19,10 @@
 	<script src="#Application.RootTemplate#/assets/data-tables/jquery.dataTables.js"></script>
 	<script src="#Application.RootTemplate#/assets/data-tables/bootstrap3/dataTables.bootstrap.js"></script>
 
+	<!--page specific plugin scripts-->
+	<script type="text/javascript" src="#Application.RootTemplate#/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script> 
+	<script type="text/javascript" src="#Application.RootTemplate#/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+	
 	<!--flaty scripts-->
 	<script src="#Application.RootTemplate#/js/flaty.js"></script>
 	<script src="#Application.RootTemplate#/js/flaty-demo-codes.js"></script>
@@ -27,5 +31,8 @@
 	<script type="text/javascript" src="#Application.RootTemplate#/assets/jquery-validation/dist/additional-methods.min.js"></script>
 
 	<script type="text/javascript" src="#Application.RootTemplate#/assets/bootstrap-duallistbox/duallistbox/bootstrap-duallistbox.js"></script>
+	<!---Template para el Mail--->
+	<script src="#Application.RootTemplateMail#/src/jquery.tokeninput.js"></script>
+	<script type="text/javascript" src="src/jquery.tokeninput.js"></script>
 
 </cfoutput>
