@@ -1,0 +1,4 @@
+Mail 
+http://stackoverflow.com/questions/13157049/making-a-simple-email-messaging-database-schema
+
+
