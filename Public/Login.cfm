@@ -67,6 +67,12 @@
 							Tu Clave es incorrecta
 						</div>
 					</div>
+				<cfelseif isdefined('err') and err EQ 3>
+					<div class="form-group">
+						<div class="controls">
+							Tu sesión  ha expirado
+						</div>
+					</div>
 				<cfelse>
 					<div class="form-group">
 						<div class="controls">
