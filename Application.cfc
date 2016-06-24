@@ -10,9 +10,10 @@
     <cfsetting requesttimeout="20" showdebugoutput="false" enablecfoutputonly="false"/>
  
     <cffunction name="OnApplicationStart" access="public" returntype="boolean" output="false" hint="Se activa cuando se crea la primera aplicación.">
-		<cfset Application.RootTemplate = '/FLATY/code'/>
-		<cfset Application.Context      = ''/>
-		<cfset Application.Datasorce    = 'Thochi'/>
+		<cfset Application.RootTemplate 	= '/FLATY/code'/>
+		<cfset Application.RootTemplateMail = '/FLATY/loopj-jquery-tokeninput/'/>
+		<cfset Application.Context      	= ''/>
+		<cfset Application.Datasorce    	= 'Thochi'/>
         <cfreturn true />
     </cffunction>
  
@@ -68,7 +69,12 @@
 			
 			</cfif>
 		</cflogin>
-		
+		<cfif NOT isdefined('session.Usucodigo')>
+			<cflogout>
+			<cfset err = 3>
+			<cfinclude template="/#application.Context#/Public/login.cfm">
+			<cfabort>
+		</cfif>
 			
         <!--- Return out. --->
         <cfreturn true />
@@ -165,9 +171,10 @@
             required="false"
             default=""
             />
- 		<cfdump var="Upps que pena, un Error">
-		<cfdump var="#Exception#">
-		<cfdump var="#EventName#">
+			<cfset request.Error.Exception = Arguments.Exception>
+			<cfset request.Error.EventName = Arguments.EventName>
+ 		<cfinclude template="Portal/commons/Error-Generic.cfm">
+		
         <!--- Return out. --->
         <cfreturn />
     </cffunction>
@@ -175,7 +182,7 @@
 	<cffunction name="onMissingTemplate" returnType="boolean">
 		<cfargument type="string" name="targetPage" required=true/>
 	
-		<cfinclude template="Portal/commons/404.cfm">
+		<cfinclude template="Portal/commons/Error-404.cfm">
 		<cfreturn true>
 	</cffunction>
  
