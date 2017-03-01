@@ -1,3 +1,4 @@
+
 <cfif isDefined('Application.Datasorce')>
 	<cfquery datasource="#Application.Datasorce#">
 		delete from thochi 
@@ -34,59 +35,52 @@
 	</cfquery>
 </cfif>
 
-
-<cfdump var="#session#">
-
 Usuario Administrador creado<br />
-<cfif isdefined('session.Usucodigo')>
 	<!---Creacion de Menús Creados--->
 	<cfquery name="rsUsuario" datasource="#Application.Datasorce#">
-		INSERT INTO menus(Codigo,Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
-			select 'seguridad','Seguridad','/','0',null,'',0,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
+		INSERT INTO menus(Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
+			select 'Seguridad','/','0',null,'',0,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
 		from thochi
 		where (select Count(1)
 				from menus
-			   where Codigo = 'seguridad') = 0
+			   where Titulo = 'Seguridad') = 0
 	</cfquery>
 	<cfquery name="rsUsuario" datasource="#Application.Datasorce#">
-		INSERT INTO menus(Codigo,Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
-			select 'ayuda','ayuda','/','0',null,'',0,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
+		INSERT INTO menus(Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
+			select 'ayuda','/','0',null,'',0,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
 		from thochi
 		where (select Count(1)
 				from menus
-			   where Codigo = 'ayuda') = 0
+			   where Titulo = 'ayuda') = 0
 	</cfquery>
 	<cfquery name="rsUsuario" datasource="#Application.Datasorce#">
-		INSERT INTO menus(Codigo,Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
-			select 'Usuarios','Usuarios','/Portal/seguridad/Usuario.cfm','1',
-			(select Menuid from menus where Codigo = 'seguridad'),
+		INSERT INTO menus(Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
+			select 'Usuarios','/Portal/seguridad/Usuario.cfm','1',
+			(select Menuid from menus where Titulo = 'Seguridad'),
 			'',0,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
 		from thochi
 		where (select Count(1)
 				from menus
-			   where Codigo = 'Usuarios') = 0
+			   where Titulo = 'Usuarios') = 0
 	</cfquery>
 	<cfquery name="rsUsuario" datasource="#Application.Datasorce#">
-		INSERT INTO menus(Codigo,Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
-			select 'menus','Menus','/Portal/seguridad/Menu.cfm','1',
-			(select Menuid from menus where Codigo = 'seguridad'),
+		INSERT INTO menus(Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
+			select 'Menus','/Portal/seguridad/Menu.cfm','1',
+			(select Menuid from menus where Titulo = 'Seguridad'),
 			'',1,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
 		from thochi
 		where (select Count(1)
 				from menus
-			   where Codigo = 'menus') = 0
+			   where Titulo = 'Menus') = 0
 	</cfquery>
 	<cfquery name="rsUsuario" datasource="#Application.Datasorce#">
-		INSERT INTO menus(Codigo,Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
-			select 'tags','Custom Tags','/Portal/ayuda/CustomTags.cfm','1',
-			(select Menuid from menus where Codigo = 'seguridad'),
+		INSERT INTO menus(Titulo,URLinicial,Nivel,MenuIdPadre,IconFont,Orden,Usucodigo,FechaAlta,FechaCambio)
+			select 'Custom Tags','/Portal/ayuda/CustomTags.cfm','1',
+			(select Menuid from menus where Titulo = 'Seguridad'),
 			'',0,<cfqueryparam cfsqltype="cf_sql_numeric" value="#session.Usucodigo#">,CURRENT_DATE(),CURRENT_DATE()
 			from thochi
 		where (select Count(1)
 				from menus
-			   where Codigo = 'tags') = 0
+			   where Titulo = 'Custom Tags') = 0
 	</cfquery>
 	Menus de Seguridad Creados<br />
-<cfelse>
-	Para realizar la creación de menus debe estar Logueado<br />
-</cfif>
